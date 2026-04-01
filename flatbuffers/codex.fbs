@@ -1,0 +1,36 @@
+﻿namespace CodexSystem;
+
+enum ResourceType : byte { None = 0, Audio = 1, Image = 2 }
+enum EntryType    : byte { Primary = 0, Secondary = 1 }
+
+table Resource {
+    id:            uint;
+    file_path:     string;
+    resource_type: ResourceType;
+}
+
+table Entry {
+    id:             uint;
+    requirement_id: uint;       // 0 = no requirement
+    entry_type:     EntryType;
+    title:          string;
+    content:        string;
+    audio_id:       uint;       // 0 = no audio
+    image_id:       uint;       // 0 = no image
+    sort_order:     int;
+    sub_entries:    [Entry];    // populated for Primary entries only; empty for Secondary
+}
+
+table Category {
+    id:         uint;
+    name:       string;
+    sort_order: int;
+    entries:    [Entry];        
+}
+
+table CodexRoot {
+    categories: [Category];
+    resources:  [Resource];
+}
+
+root_type CodexRoot;

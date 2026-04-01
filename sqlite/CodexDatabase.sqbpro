@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="CodexDatabase.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="0"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="4302"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="0" parent="0"/><expanded_item id="1" parent="0"/><expanded_item id="2" parent="0"/><expanded_item id="3" parent="0"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="categories" custom_title="0" dock_id="1" table="4,10:maincategories"/><dock_state state="000000ff00000000fd0000000100000002000004df0000039bfc0100000001fb000000160064006f0063006b00420072006f00770073006500310100000000000004df0000011b00ffffff0000029e0000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="categories" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="32"/><column index="2" value="54"/><column index="3" value="87"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1*">PRAGMA foreign_keys = ON;
+
+CREATE TABLE &quot;categories&quot; (
+    &quot;id&quot;         INTEGER PRIMARY KEY,
+    &quot;name&quot;       TEXT NOT NULL,
+    &quot;sort_order&quot; INTEGER DEFAULT 0
+);
+
+CREATE TABLE &quot;requirements&quot; (
+    &quot;id&quot;          INTEGER PRIMARY KEY,
+    &quot;description&quot; TEXT NOT NULL
+);
+
+CREATE TABLE &quot;resources&quot; (
+    &quot;id&quot;            INTEGER PRIMARY KEY,
+    &quot;file_path&quot;     TEXT NOT NULL,
+    &quot;resource_type&quot; INTEGER,    -- 0 = none, 1 = audio, 2 = image
+    &quot;url&quot;           TEXT,
+    &quot;tts_metadata&quot;  TEXT
+);
+
+CREATE TABLE &quot;codex_entries&quot; (
+    &quot;id&quot;              INTEGER PRIMARY KEY,
+    &quot;category_id&quot;     INTEGER NOT NULL,
+    &quot;parent_entry_id&quot; INTEGER,           -- NULL = Primary entry; set = Secondary entry
+    &quot;requirement_id&quot;  INTEGER,           -- NULL = always unlocked; game handles evaluation
+    &quot;entry_type&quot;      INTEGER NOT NULL,  -- 0 = Primary, 1 = Secondary
+    &quot;title&quot;           TEXT NOT NULL,
+    &quot;content&quot;         TEXT NOT NULL,
+    &quot;audio_id&quot;        INTEGER,
+    &quot;image_id&quot;        INTEGER,
+    &quot;sort_order&quot;      INTEGER DEFAULT 0,
+    FOREIGN KEY(&quot;category_id&quot;)     REFERENCES &quot;categories&quot;(&quot;id&quot;),
+    FOREIGN KEY(&quot;parent_entry_id&quot;) REFERENCES &quot;codex_entries&quot;(&quot;id&quot;),
+    FOREIGN KEY(&quot;requirement_id&quot;)  REFERENCES &quot;requirements&quot;(&quot;id&quot;),
+    FOREIGN KEY(&quot;audio_id&quot;)        REFERENCES &quot;resources&quot;(&quot;id&quot;),
+    FOREIGN KEY(&quot;image_id&quot;)        REFERENCES &quot;resources&quot;(&quot;id&quot;)
+);
+
+CREATE INDEX IF NOT EXISTS idx_entries_category ON codex_entries(category_id);
+CREATE INDEX IF NOT EXISTS idx_entries_parent   ON codex_entries(parent_entry_id);
+CREATE INDEX IF NOT EXISTS idx_entries_type     ON codex_entries(entry_type);</sql><current_tab id="0"/></tab_sql></sqlb_project>
