@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "/home/runner/work/sqlite-to-flatbuffers-converter/sqlite-to-flatbuffers-converter/sqlite2fbs.csproj": {}
+    "C:\\Users\\tremo\\Documents\\GitHub\\sqlite-to-flatbuffers-converter\\sqlite2fbs.csproj": {}
   },
   "projects": {
-    "/home/runner/work/sqlite-to-flatbuffers-converter/sqlite-to-flatbuffers-converter/sqlite2fbs.csproj": {
+    "C:\\Users\\tremo\\Documents\\GitHub\\sqlite-to-flatbuffers-converter\\sqlite2fbs.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/runner/work/sqlite-to-flatbuffers-converter/sqlite-to-flatbuffers-converter/sqlite2fbs.csproj",
+        "projectUniqueName": "C:\\Users\\tremo\\Documents\\GitHub\\sqlite-to-flatbuffers-converter\\sqlite2fbs.csproj",
         "projectName": "sqlite2fbs",
-        "projectPath": "/home/runner/work/sqlite-to-flatbuffers-converter/sqlite-to-flatbuffers-converter/sqlite2fbs.csproj",
-        "packagesPath": "/home/runner/.nuget/packages/",
-        "outputPath": "/home/runner/work/sqlite-to-flatbuffers-converter/sqlite-to-flatbuffers-converter/obj/",
+        "projectPath": "C:\\Users\\tremo\\Documents\\GitHub\\sqlite-to-flatbuffers-converter\\sqlite2fbs.csproj",
+        "packagesPath": "C:\\Users\\tremo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tremo\\Documents\\GitHub\\sqlite-to-flatbuffers-converter\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/runner/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\tremo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -69,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.201/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Users\\tremo\\.dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
