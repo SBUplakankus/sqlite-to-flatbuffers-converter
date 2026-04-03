@@ -17,14 +17,14 @@ table Entry {
     content:        string;
     audio_id:       uint;       // 0 = no audio
     image_id:       uint;       // 0 = no image
-    sort_order:     int;
+    sort_order:     uint;
     sub_entries:    [Entry];    // populated for Primary entries only; empty for Secondary
 }
 
 table Category {
     id:         uint;
     name:       string;
-    sort_order: int;
+    sort_order: uint;
     entries:    [Entry];        
 }
 
