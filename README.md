@@ -2,9 +2,10 @@
 
 # sqlite2fbs
 
-![.NET](https://shieldcn.dev/badge/.NET-10.0-512BD4.png?variant=secondary&logo=dotnet)
-![FlatBuffers](https://shieldcn.dev/badge/FlatBuffers-25.2.10-FF6F00.png?variant=secondary&logo=google)
-![SQLite](https://shieldcn.dev/badge/SQLite-3-003B57.png?variant=secondary&logo=sqlite)
+![.NET](https://shieldcn.dev/badge/.NET-10.0-512BD4.png?variant=outline&logo=dotnet)
+![FlatBuffers](https://shieldcn.dev/badge/FlatBuffers-25.2.10-FF6F00.png?variant=outline&logo=google)
+![SQLite](https://shieldcn.dev/badge/SQLite-3-003B57.png?variant=outline&logo=sqlite)
+![MIT License](https://shieldcn.dev/badge/License-MIT-blue.png?variant=outline)
 
 SQLite to FlatBuffers conversion pipeline. Author game data in a database, ship it as zero-allocation binary.
 
@@ -33,15 +34,15 @@ A .NET console tool that bridges flexible data authoring and high-performance ru
 ### Data Flow
 
 ```mermaid
-flowchart LR
-    A["SQLite Database<br/>(.db)"] --> B["DatabaseParser<br/>(Dapper)"]
-    B --> C["FlatbuffersConverter<br/>(FlatBufferBuilder)"]
-    C --> D["Binary Output<br/>(.bin)"]
+flowchart TB
+    A["SQLite Database (.db)"] --> B["DatabaseParser (Dapper)"]
+    B --> C["FlatbuffersConverter (FlatBufferBuilder)"]
+    C --> D["Binary Output (.bin)"]
 ```
 
-- **SQLite Layer** — Author data externally in a relational database. Edit tables visually, run queries, iterate fast.
-- **FlatBuffers Layer** — Convert relational data into a directly-nested binary schema. Zero-allocation reads, no deserialization overhead.
-- **Conversion Layer** — Reads SQLite via Dapper, builds the FlatBuffer tree recursively, writes the `.bin` file.
+- **SQLite Layer** -- Author data externally in a relational database. Edit tables visually, run queries, iterate fast.
+- **FlatBuffers Layer** -- Convert relational data into a directly-nested binary schema. Zero-allocation reads, no deserialization overhead.
+- **Conversion Layer** -- Reads SQLite via Dapper, builds the FlatBuffer tree recursively, writes the `.bin` file.
 
 ### Nesting Strategy
 
@@ -50,15 +51,15 @@ flowchart TB
     SQL["SQLite (Relational)"]
     FB["FlatBuffers (Direct Nesting)"]
 
-    SQL -->|parent_entry_id<br/>foreign key| FB
-    FB -->|sub_entries: [Entry]<br/>nested vector| Tree["Traversal<br/>without lookups"]
+    SQL -->|parent_entry_id foreign key| FB
+    FB -->|sub_entries nested vector| Tree["Traversal without lookups"]
 ```
 
 The key design decision: FlatBuffers uses **direct nesting** instead of foreign-key references. Where SQLite stores `parent_entry_id` as a relational link, the FlatBuffers schema nests sub-entries directly inside their parent. This eliminates runtime lookups and makes traversing the data tree a single sequential walk.
 
 ## FlatBuffers Schema
 
-The schema mirrors the database structure with one intentional difference — direct nesting replaces foreign keys:
+The schema mirrors the database structure with one intentional difference: direct nesting replaces foreign keys.
 
 ```flatbuffers
 namespace CodexSystem;
@@ -123,9 +124,9 @@ Please select an option:
 4. Exit
 ```
 
-- **Option 1** — Parses the SQLite database and writes a `CodexData.bin` to the `output/` directory.
-- **Option 2** — Prints database stats (category/entry counts, resource breakdown).
-- **Option 3** — Validates the generated binary by reading it back through FlatBuffers and printing stats.
+- **Option 1** -- Parses the SQLite database and writes a `CodexData.bin` to the `output/` directory.
+- **Option 2** -- Prints database stats (category/entry counts, resource breakdown).
+- **Option 3** -- Validates the generated binary by reading it back through FlatBuffers and printing stats.
 
 ### Self-Contained Publish
 
@@ -137,12 +138,12 @@ Produces a single-file, self-contained executable at `bin/Release/net10.0/win-x6
 
 ## Example Data
 
-The repo includes a bundled `CodexDatabase.db` containing **The Veil Compact** — an original sci-fi codex dataset inspired by the Mass Effect 2 codex structure:
+The repo includes a bundled `CodexDatabase.db` containing **The Veil Compact**, an original sci-fi codex dataset inspired by the Mass Effect 2 codex structure:
 
-- **10 categories** — Aliens, Humanity, Government, Military, Technology, Worlds, History, Culture, Economy, The Hollow
-- **Primary entries** — audio narration + images
-- **Secondary entries** — text-only sub-entries
-- **Unlock requirements** — tied to game progression
+- **10 categories** -- Aliens, Humanity, Government, Military, Technology, Worlds, History, Culture, Economy, The Hollow
+- **Primary entries** -- audio narration + images
+- **Secondary entries** -- text-only sub-entries
+- **Unlock requirements** -- tied to game progression
 
 <details>
 <summary>Project Structure</summary>
@@ -175,8 +176,8 @@ The repo includes a bundled `CodexDatabase.db` containing **The Veil Compact** �
 
 ## Future
 
-This repo captures the core conversion pipeline — a stable, working backend for authoring SQLite data and shipping it as FlatBuffers binaries. The concept and conversion engine will serve as the foundation for a larger application that expands beyond the console interface, while this repository and its core architecture remain as-is.
+This repo captures the core conversion pipeline, a stable, working backend for authoring SQLite data and shipping it as FlatBuffers binaries. The concept and conversion engine will serve as the foundation for a larger application that expands beyond the console interface, while this repository and its core architecture remain as-is.
 
 ---
 
-> **License:** [MIT](LICENSE) — Copyright (c) 2026 Seán Burke
+> **License:** [MIT](LICENSE) Copyright (c) 2026 Seán Burke
