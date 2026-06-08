@@ -1,6 +1,6 @@
 <div align="center">
 
-# sqlite2fbs
+# SQLite 2 Flatbuffers
 
 ![.NET](https://shieldcn.dev/badge/.NET-10.0-512BD4.png?variant=outline&logo=dotnet)
 ![FlatBuffers](https://shieldcn.dev/badge/FlatBuffers-25.2.10-FF6F00.png?variant=outline&logo=google)
