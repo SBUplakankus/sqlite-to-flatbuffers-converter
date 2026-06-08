@@ -23,11 +23,11 @@ A .NET console tool that bridges flexible data authoring and high-performance ru
 
 ## Features
 
-- **Three-layer pipeline** -- SQLite authoring, FlatBuffers runtime, conversion layer bridges them
-- **Direct nesting** -- relational foreign keys are recursively resolved into nested FlatBuffer tables, eliminating runtime lookups
-- **Dapper-based parsing** -- lightweight ORM maps database tables to strongly-typed C# records
-- **Interactive validation** -- built-in debug menus to verify SQL input and FlatBuffer output side by side
-- **Self-contained publish** -- single-file .NET 10 executable with no runtime dependencies
+- **Three-layer pipeline** - SQLite authoring, FlatBuffers runtime, conversion layer bridges them
+- **Direct nesting** - relational foreign keys are recursively resolved into nested FlatBuffer tables, eliminating runtime lookups
+- **Dapper-based parsing** - lightweight ORM maps database tables to strongly-typed C# records
+- **Interactive validation** - built-in debug menus to verify SQL input and FlatBuffer output side by side
+- **Self-contained publish** - single-file .NET 10 executable with no runtime dependencies
 
 ## Architecture
 
@@ -40,9 +40,9 @@ flowchart TB
     C --> D["Binary Output (.bin)"]
 ```
 
-- **SQLite Layer** -- Author data externally in a relational database. Edit tables visually, run queries, iterate fast.
-- **FlatBuffers Layer** -- Convert relational data into a directly-nested binary schema. Zero-allocation reads, no deserialization overhead.
-- **Conversion Layer** -- Reads SQLite via Dapper, builds the FlatBuffer tree recursively, writes the `.bin` file.
+- **SQLite Layer** - Author data externally in a relational database. Edit tables visually, run queries, iterate fast.
+- **FlatBuffers Layer** - Convert relational data into a directly-nested binary schema. Zero-allocation reads, no deserialization overhead.
+- **Conversion Layer** - Reads SQLite via Dapper, builds the FlatBuffer tree recursively, writes the `.bin` file.
 
 ### Nesting Strategy
 
@@ -65,36 +65,36 @@ The schema mirrors the database structure with one intentional difference: direc
 namespace CodexSystem;
 
 enum ResourceType : byte { None = 0, Audio = 1, Image = 2 }
-enum EntryType    : byte { Primary = 0, Secondary = 1 }
+enum EntryType : byte { Primary = 0, Secondary = 1 }
 
 table Resource {
-    id:            uint;
-    file_path:     string;
+    id: uint;
+    file_path: string;
     resource_type: ResourceType;
 }
 
 table Entry {
-    id:             uint;
-    requirement_id: uint;
-    entry_type:     EntryType;
-    title:          string;
-    content:        string;
-    audio_id:       uint;
-    image_id:       uint;
-    sort_order:     uint;
-    sub_entries:    [Entry];
+    id: uint;
+    requirement_id: uint;      
+    entry_type: EntryType;
+    title: string;
+    content: string;
+    audio_id: uint;       
+    image_id: uint;       
+    sort_order: uint;
+    sub_entries: [Entry];   
 }
 
 table Category {
-    id:         uint;
-    name:       string;
+    id: uint;
+    name: string;
     sort_order: uint;
-    entries:    [Entry];
+    entries:[Entry];        
 }
 
 table CodexRoot {
     categories: [Category];
-    resources:  [Resource];
+    resources: [Resource];
 }
 
 root_type CodexRoot;
@@ -124,9 +124,9 @@ Please select an option:
 4. Exit
 ```
 
-- **Option 1** -- Parses the SQLite database and writes a `CodexData.bin` to the `output/` directory.
-- **Option 2** -- Prints database stats (category/entry counts, resource breakdown).
-- **Option 3** -- Validates the generated binary by reading it back through FlatBuffers and printing stats.
+- **Option 1** - Parses the SQLite database and writes a `CodexData.bin` to the `output/` directory.
+- **Option 2** - Prints database stats (category/entry counts, resource breakdown).
+- **Option 3** - Validates the generated binary by reading it back through FlatBuffers and printing stats.
 
 ### Self-Contained Publish
 
@@ -140,10 +140,10 @@ Produces a single-file, self-contained executable at `bin/Release/net10.0/win-x6
 
 The repo includes a bundled `CodexDatabase.db` containing **The Veil Compact**, an original sci-fi codex dataset inspired by the Mass Effect 2 codex structure:
 
-- **10 categories** -- Aliens, Humanity, Government, Military, Technology, Worlds, History, Culture, Economy, The Hollow
-- **Primary entries** -- audio narration + images
-- **Secondary entries** -- text-only sub-entries
-- **Unlock requirements** -- tied to game progression
+- **10 categories** - Aliens, Humanity, Government, Military, Technology, Worlds, History, Culture, Economy, The Hollow
+- **Primary entries** - audio narration + images
+- **Secondary entries** - text-only sub-entries
+- **Unlock requirements** - tied to game progression
 
 <details>
 <summary>Project Structure</summary>
